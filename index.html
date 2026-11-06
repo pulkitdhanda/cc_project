@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Attendly — Student Attendance Tracker</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main id="loginView" class="login-shell">
+    <section class="login-visual">
+      <div class="brand brand-light"><span class="brand-mark">A</span><span>attendly</span></div>
+      <div class="visual-copy">
+        <span class="eyebrow">SMART ATTENDANCE MANAGEMENT</span>
+        <h1>Every class.<br><em>Every student.</em><br>On track.</h1>
+        <p>A simple, organized way to keep attendance records accurate and your classroom running smoothly.</p>
+      </div>
+      <div class="visual-footer"><span>●</span> Your classroom, in sync.</div>
+      <div class="visual-orb orb-one"></div><div class="visual-orb orb-two"></div>
+    </section>
+    <section class="login-panel">
+      <div class="mobile-brand brand"><span class="brand-mark">A</span><span>attendly</span></div>
+      <div class="login-card">
+        <div class="login-icon">↗</div>
+        <span class="eyebrow muted">WELCOME BACK</span>
+        <h2>Sign in to your<br>workspace</h2>
+        <p class="subtext">Enter any ID and password to explore the demo.</p>
+        <form id="loginForm">
+          <label for="userId">User ID</label>
+          <div class="field-wrap"><span>♙</span><input id="userId" type="text" placeholder="Enter any user ID" autocomplete="username" required></div>
+          <label for="password">Password</label>
+          <div class="field-wrap"><span>⌑</span><input id="password" type="password" placeholder="Enter any password" autocomplete="current-password" required><button type="button" class="show-pass" id="togglePassword">Show</button></div>
+          <button class="primary-btn login-btn" type="submit">Sign in <span>→</span></button>
+        </form>
+        <div class="demo-note"><span class="info-dot">i</span> Demo login: any non-empty ID and password will work.</div>
+      </div>
+      <p class="copyright">© 2026 Attendly · Student Attendance Tracker</p>
+    </section>
+  </main>
+
+  <main id="appView" class="app-shell hidden">
+    <aside class="sidebar" id="sidebar">
+      <div class="brand"><span class="brand-mark">A</span><span>attendly</span></div>
+      <div class="side-label">WORKSPACE</div>
+      <nav>
+        <button class="nav-item active" data-page="overview"><span>▦</span> Overview</button>
+        <button class="nav-item" data-page="attendance"><span>✓</span> Attendance</button>
+        <button class="nav-item" data-page="students"><span>♙</span> Students</button>
+      </nav>
+      <div class="sidebar-bottom">
+        <div class="help-card"><div class="help-icon">✦</div><strong>Keep it organized</strong><p>Mark attendance daily to keep your class records up to date.</p></div>
+        <button class="nav-item logout" id="logoutBtn"><span>↪</span> Log out</button>
+      </div>
+    </aside>
+    <section class="main-area">
+      <header class="topbar">
+        <button class="mobile-menu" id="menuBtn">☰</button>
+        <div><span class="top-kicker">STUDENT MANAGEMENT</span><div class="top-title" id="pageTitle">Overview</div></div>
+        <div class="top-actions"><span class="today-label" id="todayLabel"></span><div class="avatar" id="avatar">U</div></div>
+      </header>
+      <div class="content">
+        <section id="overviewPage" class="page">
+          <div class="welcome-row"><div><span class="eyebrow muted">YOUR CLASSROOM AT A GLANCE</span><h1>Good day, <span id="welcomeName">there</span> <span class="wave">✦</span></h1><p>Here’s what’s happening with your students today.</p></div><button class="primary-btn" id="quickMarkBtn">＋ Mark attendance</button></div>
+          <div class="stat-grid">
+            <article class="stat-card"><div class="stat-top"><span>Total students</span><span class="stat-icon purple">♙</span></div><strong id="totalStat">0</strong><small>Students in your class</small></article>
+            <article class="stat-card"><div class="stat-top"><span>Present today</span><span class="stat-icon green">✓</span></div><strong id="presentStat">0</strong><small><span class="positive" id="presentPercent">0%</span> of total students</small></article>
+            <article class="stat-card"><div class="stat-top"><span>Absent today</span><span class="stat-icon orange">–</span></div><strong id="absentStat">0</strong><small>Needs attention</small></article>
+            <article class="stat-card"><div class="stat-top"><span>Attendance rate</span><span class="stat-icon blue">↗</span></div><strong id="rateStat">0%</strong><small>Based on today’s records</small></article>
+          </div>
+          <div class="dashboard-grid">
+            <article class="panel attendance-panel"><div class="panel-heading"><div><h3>Today’s attendance</h3><p>A quick look at your class status</p></div><button class="text-btn" data-goto="attendance">View all →</button></div><div class="attendance-summary"><div class="donut" id="donut"><div><strong id="donutValue">0%</strong><small>Present</small></div></div><div class="legend"><div><i class="dot present-dot"></i><span>Present</span><b id="legendPresent">0</b></div><div><i class="dot absent-dot"></i><span>Absent</span><b id="legendAbsent">0</b></div><div><i class="dot unmarked-dot"></i><span>Not marked</span><b id="legendUnmarked">0</b></div></div></div></article>
+            <article class="panel date-panel"><div class="calendar-art">▦</div><span class="eyebrow muted">TODAY'S DATE</span><h2 id="bigDate"></h2><p id="dayName"></p><button class="outline-btn" data-goto="attendance">Take attendance →</button></article>
+          </div>
+          <article class="panel recent-panel"><div class="panel-heading"><div><h3>Student directory</h3><p>Your recently listed students</p></div><button class="text-btn" data-goto="students">Manage students →</button></div><div class="table-wrap"><table><thead><tr><th>STUDENT</th><th>ROLL NO.</th><th>COURSE</th><th>STATUS TODAY</th></tr></thead><tbody id="recentStudents"></tbody></table></div></article>
+        </section>
+
+        <section id="attendancePage" class="page hidden">
+          <div class="page-intro"><div><span class="eyebrow muted">DAILY RECORDS</span><h1>Attendance</h1><p>Mark and review student attendance for a selected date.</p></div><button class="outline-btn" id="exportBtn">↓ Export CSV</button></div>
+          <div class="panel attendance-tools"><div class="date-control"><label for="attendanceDate">Attendance date</label><input type="date" id="attendanceDate"></div><div class="search-box"><span>⌕</span><input id="attendanceSearch" placeholder="Search student or roll number..."></div><div class="tool-actions"><button class="soft-btn" id="allPresentBtn">Mark all present</button><button class="soft-btn" id="clearBtn">Clear day</button></div></div>
+          <div class="attendance-progress panel"><div><strong id="markedCount">0 of 0 marked</strong><span id="progressText">Start by marking students present or absent.</span></div><div class="progress-track"><span id="progressBar"></span></div></div>
+          <div class="panel"><div class="panel-heading"><div><h3>Class list</h3><p>Choose a status for each student</p></div><div class="filter-tabs"><button class="filter active" data-filter="all">All</button><button class="filter" data-filter="present">Present</button><button class="filter" data-filter="absent">Absent</button><button class="filter" data-filter="unmarked">Unmarked</button></div></div>
+            <div class="table-wrap"><table><thead><tr><th>STUDENT</th><th>ROLL NO.</th><th>COURSE</th><th>ATTENDANCE STATUS</th></tr></thead><tbody id="attendanceRows"></tbody></table></div>
+            <div class="empty-state hidden" id="attendanceEmpty">No students match your search.</div>
+          </div>
+        </section>
+
+        <section id="studentsPage" class="page hidden">
+          <div class="page-intro"><div><span class="eyebrow muted">CLASS DIRECTORY</span><h1>Students</h1><p>Add students and keep your class list up to date.</p></div><button class="primary-btn" id="addStudentBtn">＋ Add student</button></div>
+          <div class="student-summary"><div class="panel mini-stat"><span>Total enrolled</span><strong id="directoryCount">0</strong></div><div class="panel mini-stat"><span>Course / class</span><strong>BCA · Semester 3</strong></div><div class="panel mini-stat"><span>Records</span><strong>Local demo</strong></div></div>
+          <div class="panel"><div class="panel-heading"><div><h3>All students</h3><p>Manage your classroom directory</p></div><div class="search-box"><span>⌕</span><input id="studentSearch" placeholder="Search students..."></div></div><div class="table-wrap"><table><thead><tr><th>STUDENT</th><th>ROLL NO.</th><th>COURSE</th><th>JOINED</th><th></th></tr></thead><tbody id="studentRows"></tbody></table></div><div class="empty-state hidden" id="studentsEmpty">No students found.</div></div>
+        </section>
+      </div>
+      <footer class="app-footer">Attendly <span>·</span> Simple attendance, smarter classrooms.</footer>
+    </section>
+  </main>
+
+  <div class="modal-backdrop hidden" id="studentModal"><div class="modal"><button class="modal-close" id="closeModal">×</button><span class="eyebrow muted">CLASS DIRECTORY</span><h2>Add a student</h2><p>Enter the student’s details below.</p><form id="studentForm"><label for="studentName">Full name</label><input id="studentName" placeholder="e.g. Aanya Sharma" required><label for="rollNo">Roll number</label><input id="rollNo" placeholder="e.g. BCA-024" required><label for="course">Course / class</label><input id="course" value="BCA · Semester 3" required><div class="modal-actions"><button type="button" class="outline-btn" id="cancelModal">Cancel</button><button type="submit" class="primary-btn">Add student</button></div></form></div></div>
+  <div class="toast" id="toast"></div>
+  <script src="script.js"></script>
+</body>
+</html>
